@@ -25,10 +25,9 @@ flowchart TD
     SA --> |Clicca servizio| DET
 
     DET --> |Richiedi modifica orario| EV[Admin — Eventi Operativi\nAdmin approva o rifiuta]
-    DET --> |Segnala assenza| CTRL[Admin — Controllo\nAlert servizio scoperto]
+    DET --> |Segnala assenza| ANN[Appuntamento annullato\nNotifica al personale assegnato]
 
     EV --> |Esito| NOT[Notifica al cliente]
-    CTRL --> |Esito| NOT
 ```
 
 ---
