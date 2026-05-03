@@ -12,23 +12,43 @@
 
 ---
 
-## Flusso
+## Flusso 1 — Appuntamenti e Modifiche
 
 ```mermaid
 flowchart TD
     DASH[Dashboard]
 
-    DASH --> |Servizio continuativo| C1[Prossimo servizio\nRichiedi servizio extra]
-    DASH --> |Servizio booking| C2[Ripeti servizio\nPrenota di nuovo\nLe mie richieste]
+    DASH --> CAL[Calendario\nVista servizi attivi]
+    DASH --> SA[Servizi\nLista servizi attivi]
 
-    C1 --> SERV[Servizi\nServizi attivi e calendario]
-    C2 --> NUOVI[Nuovi\nNuova richiesta]
+    CAL --> |Clicca appuntamento| DET[Dettaglio appuntamento\nData, orario, operatore, indirizzo]
+    SA --> |Clicca servizio| DET
 
-    SERV --> |Segnalazione| EV[Admin — Eventi Operativi]
+    DET --> |Richiedi modifica orario| EV[Admin — Eventi Operativi\nAdmin approva o rifiuta]
+    DET --> |Segnala assenza| CTRL[Admin — Controllo\nAlert servizio scoperto]
 
-    NUOVI --> |Richiesta inviata| IR[Admin — Inbound Requests]
-    IR --> |Stato aggiornato| STATO[In attesa\nIn valutazione\nAccettata]
-    STATO --> |Confermata| SERV
+    EV --> |Esito| NOT[Notifica al cliente]
+    CTRL --> |Esito| NOT
+```
 
-    DASH --> SUPP[Supporto\nWhatsApp sempre visibile]
+---
+
+## Flusso 2 — Nuova Richiesta
+
+```mermaid
+flowchart TD
+    DASH[Dashboard]
+
+    DASH --> |Richiedi servizio extra\nPrenota di nuovo| NUOVI[Nuovi\nModulo richiesta]
+
+    NUOVI --> |Step 1| S1[Dati personali e contatti]
+    S1 --> |Step 2| S2[Tipo servizio e dettagli]
+    S2 --> |Invia| IR[Admin — Inbound Requests]
+
+    IR --> STATO{Stato richiesta\nvisibile al cliente}
+    STATO --> |In attesa| W[In attesa]
+    STATO --> |In valutazione| V[In valutazione]
+    STATO --> |Accettata| A[Accettata]
+
+    A --> SA[Appare in Servizi attivi]
 ```
