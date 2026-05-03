@@ -9,7 +9,7 @@
 | Personale | 30% | Candidatura spontanea |
 | Richiesta veloce | 10% | Contatto rapido senza login (es. partner) |
 
-> La landing e' uguale per tutti — il sistema non sa chi sei finche' non fai login.
+> La landing e' uguale per tutti — distinzione admin / personale / cliente solo dopo login.
 
 ---
 
