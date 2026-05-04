@@ -6,8 +6,7 @@
 |---|---|---|
 | Login | In alto | Accesso per utenti registrati |
 | Clienti | 60% | Richiesta nuovo servizio in 2 step |
-| Personale | 30% | Candidatura spontanea |
-| Richiesta veloce | 10% | Contatto rapido senza login (es. partner) |
+| Personale | 40% | Candidatura spontanea |
 
 > La landing e' uguale per tutti — la distinzione admin / personale / cliente avviene solo dopo il login.
 
@@ -22,7 +21,6 @@ flowchart TD
     LP --> LOGIN[Bottone LOGIN]
     LP --> RC[Sezione Clienti\nRichiesta servizio]
     LP --> RP[Sezione Personale\nCandidatura]
-    LP --> RV[Richiesta veloce\nsenza login]
 
     LOGIN --> AUTH{Autenticazione}
     AUTH --> |Admin| ADMIN[Area Admin]
@@ -34,8 +32,6 @@ flowchart TD
 
     RP --> FP[Form Personale\nda definire]
     FP --> |Invia| IR
-
-    RV --> |Nome, telefono, nota| IR
 ```
 
 ---
