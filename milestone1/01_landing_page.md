@@ -29,7 +29,11 @@ flowchart TD
     AUTH --> |Personale| PERS[Area Personale]
     AUTH --> |Cliente| CLI[Area Cliente]
 
-    RC --> |Invia richiesta| IR[Inbound Requests]
-    RP --> |Invia candidatura| IR
-    RV --> |Invia contatto| IR
+    RC --> |Compila form in 2 step| FC[Form Cliente\nvedi dettaglio in 05_form_cliente]
+    FC --> |Invia| IR[Admin — Inbound Requests]
+
+    RP --> |Compila form| FP[Form Personale\nvedi dettaglio in 06_form_personale]
+    FP --> |Invia| IR
+
+    RV --> |Nome + telefono + nota| IR
 ```
