@@ -46,37 +46,18 @@ Il form e' diviso in 2 step. I campi del secondo step variano in base al tipo di
 
 ```mermaid
 flowchart TD
-    S1[STEP 1\nNome e cognome — Email — Telefono]
+    S1[STEP 1\nNome e cognome — Email — Telefono\nTipo di servizio — Una volta o continuativo]
 
     S1 --> TIPO{Tipo di servizio}
 
-    TIPO --> |Assistenza a ore\nEconomia domestica| GRP_A{Una volta\no continuativo?}
-    TIPO --> |Badante notturna| GRP_B{Una volta\no continuativo?}
-    TIPO --> |Badante 24h| GRP_C{Una volta\no continuativo?}
-    TIPO --> |Altro| GRP_D{Una volta\no continuativo?}
+    TIPO --> |Assistenza a ore\nEconomia domestica| A[Fascia oraria\nDurata intervento]
+    TIPO --> |Badante notturna| B[Fascia oraria]
+    TIPO --> |Badante 24h\nAltro| C[ ]
 
-    GRP_A --> |Una volta| A1[Fascia oraria\nDurata intervento\nData intervento\nIndirizzo]
-    GRP_A --> |Continuativo| A2[Fascia oraria\nDurata intervento\nData di inizio\nIndirizzo]
+    A & B & C --> DATA[Data intervento\nse una volta\n---\nData di inizio\nse continuativo]
 
-    GRP_B --> |Una volta| B1[Fascia oraria\nData intervento\nIndirizzo]
-    GRP_B --> |Continuativo| B2[Fascia oraria\nData di inizio\nIndirizzo]
-
-    GRP_C --> |Una volta| C1[Data intervento\nIndirizzo]
-    GRP_C --> |Continuativo| C2[Data di inizio\nIndirizzo]
-
-    GRP_D --> |Una volta| D1[Data intervento\nIndirizzo]
-    GRP_D --> |Continuativo| D2[Data di inizio\nIndirizzo]
-
-    A1 --> NOTE[Note opzionali]
-    A2 --> NOTE
-    B1 --> NOTE
-    B2 --> NOTE
-    C1 --> NOTE
-    C2 --> NOTE
-    D1 --> NOTE
-    D2 --> NOTE
-
-    NOTE --> INVIA[Invia\nAdmin — Inbound Requests]
+    DATA --> FINE[Indirizzo\nNote opzionali]
+    FINE --> INVIA[Invia\nAdmin — Inbound Requests]
 ```
 
 ---
