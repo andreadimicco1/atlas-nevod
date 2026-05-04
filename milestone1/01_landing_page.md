@@ -50,17 +50,13 @@ flowchart TD
 
     FORM --> TIPO{Tipo di servizio}
 
-    TIPO --> |Ass. a ore\nBadante notturna\nBadante 24h\nEconomia domestica| SCELTA{Booking\no Continuativo?}
-    TIPO --> |Altro| ALT[Note aggiuntive\nIndirizzo]
-
-    SCELTA --> |Booking| BK[Fascia oraria\nDurata se richiesta\nSelezione data]
-    SCELTA --> |Continuativo| CONT[Fascia oraria\nDurata se richiesta\nData di inizio]
+    TIPO --> |Ass. a ore\nBadante notturna\nEconomia domestica| BK[Fascia oraria\nDurata se richiesta\nSelezione data]
+    TIPO --> |Badante 24h\nAltro| ALT[Note aggiuntive\nIndirizzo]
 
     BK --> FINE[Note opzionali\nIndirizzo]
-    CONT --> FINE
-
     FINE --> LT[Lead Triage]
-    ALT --> GM[Gestione manuale Admin]
+
+    ALT --> GM[Gestione manuale Admin\nContinuativo valutato da Admin]
 ```
 
 ---
