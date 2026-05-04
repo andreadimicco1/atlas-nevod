@@ -51,10 +51,10 @@ flowchart TD
     TIPO --> |Ass. a ore\nBadante notturna\nEconomia domestica| SCELTA{Booking\no Continuativo?}
     TIPO --> |Badante 24h\nAltro| MANUAL
 
-    SCELTA --> |Booking| ORA{Fascia oraria}
+    SCELTA --> |Booking| ORA{Fascia oraria\nSelezione data}
     SCELTA --> |Continuativo| MANUAL[Note aggiuntive\nIndirizzo]
 
-    ORA --> |Mattina| DUR[Durata se richiesta\nSelezione data]
+    ORA --> |Mattina| DUR[Durata se richiesta]
     ORA --> |Pomeriggio| DUR
     ORA --> |Sera / Notte| DUR
     ORA --> |Personalizzato| CUST[Campo testo libero]
