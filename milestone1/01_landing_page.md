@@ -72,3 +72,19 @@ flowchart TD
 
     NOTE --> INVIA[Invia\nAdmin — Inbound Requests]
 ```
+
+---
+
+## Flusso 3 — Selezione fascia oraria
+
+Dove richiesto dal tipo di servizio, il campo orario non e' un testo libero ma una selezione a livelli.
+
+```mermaid
+flowchart TD
+    ORA{Fascia oraria}
+
+    ORA --> M[Mattina]
+    ORA --> P[Pomeriggio]
+    ORA --> SN[Sera / Notte]
+    ORA --> |Personalizzato| CUSTOM[Campo testo libero\nes. 14:30 oppure dalle 9 alle 11]
+```
