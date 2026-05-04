@@ -46,45 +46,29 @@ Il form e' diviso in 2 step. I campi del secondo step variano in base al tipo di
 
 ```mermaid
 flowchart TD
-    S1[STEP 1\nDati personali e tipo servizio]
+    S1[STEP 1\nNome e cognome — Email — Telefono]
 
-    S1 --> DATI[Nome e cognome\nEmail\nTelefono]
-    DATI --> TIPO{Tipo di servizio}
+    S1 --> TIPO{Tipo di servizio}
 
-    TIPO --> A[Assistenza domiciliare a ore]
-    TIPO --> B[Badante notturna]
-    TIPO --> C[Badante 24h]
-    TIPO --> D[Economia domestica]
-    TIPO --> E[Altro]
+    TIPO --> |Assistenza a ore\nEconomia domestica\nAltro| GRP_A{Una volta\no continuativo?}
+    TIPO --> |Badante notturna| GRP_B{Una volta\no continuativo?}
+    TIPO --> |Badante 24h| GRP_C{Una volta\no continuativo?}
 
-    A --> FREQ{Una volta sola\no continuativo?}
-    B --> FREQ
-    C --> FREQ
-    D --> FREQ
-    E --> FREQ
+    GRP_A --> |Una volta| A1[Orario inizio\nDurata intervento\nData intervento]
+    GRP_A --> |Continuativo| A2[Orario inizio\nDurata intervento\nData di inizio]
 
-    FREQ --> S2[STEP 2\nDettagli intervento]
+    GRP_B --> |Una volta| B1[Orario inizio\nData intervento]
+    GRP_B --> |Continuativo| B2[Orario inizio\nData di inizio]
 
-    S2 --> CAMPI[Campi adattativi\nvedi tabella sotto]
-    CAMPI --> NOTE[Note aggiuntive opzionali]
-    NOTE --> INVIA[Invia\nva in Admin — Inbound Requests]
+    GRP_C --> |Una volta| C1[Data intervento]
+    GRP_C --> |Continuativo| C2[Data di inizio]
+
+    A1 --> NOTE[Note opzionali]
+    A2 --> NOTE
+    B1 --> NOTE
+    B2 --> NOTE
+    C1 --> NOTE
+    C2 --> NOTE
+
+    NOTE --> INVIA[Invia\nAdmin — Inbound Requests]
 ```
-
-### Campi adattativi Step 2
-
-| Tipo servizio | Orario inizio | Durata | Data intervento | Data inizio |
-|---|---|---|---|---|
-| Assistenza domiciliare a ore — una volta | Si | Si | Si | No |
-| Assistenza domiciliare a ore — continuativo | Si | Si | No | Si |
-| Badante notturna — una volta | Si | No | Si | No |
-| Badante notturna — continuativo | Si | No | No | Si |
-| Badante 24h — una volta | No | No | Si | No |
-| Badante 24h — continuativo | No | No | No | Si |
-| Economia domestica — una volta | Si | Si | Si | No |
-| Economia domestica — continuativo | Si | Si | No | Si |
-| Altro — una volta | Si | Si | Si | No |
-| Altro — continuativo | Si | Si | No | Si |
-
-> Badante notturna: niente durata, si intende l'intera notte.
-> Badante 24h: niente orario e niente durata, si intende l'intera giornata.
-> Note aggiuntive sempre opzionali in tutti i casi.
