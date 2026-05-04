@@ -46,7 +46,7 @@ Il form e' diviso in 2 step. I campi del secondo step variano in base al tipo di
 
 ```mermaid
 flowchart TD
-    FORM[FORM\nNome e cognome\nEmail — Telefono\nTipo di servizio]
+    FORM[FORM\nNome e cognome\nEmail — Telefono\n]
 
     FORM --> TIPO{Tipo di servizio}
 
