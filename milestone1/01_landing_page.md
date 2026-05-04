@@ -50,18 +50,22 @@ flowchart TD
 
     S1 --> TIPO{Tipo di servizio}
 
-    TIPO --> |Assistenza a ore\nEconomia domestica\nAltro| GRP_A{Una volta\no continuativo?}
+    TIPO --> |Assistenza a ore\nEconomia domestica| GRP_A{Una volta\no continuativo?}
     TIPO --> |Badante notturna| GRP_B{Una volta\no continuativo?}
     TIPO --> |Badante 24h| GRP_C{Una volta\no continuativo?}
+    TIPO --> |Altro| GRP_D{Una volta\no continuativo?}
 
-    GRP_A --> |Una volta| A1[Orario inizio\nDurata intervento\nData intervento]
-    GRP_A --> |Continuativo| A2[Orario inizio\nDurata intervento\nData di inizio]
+    GRP_A --> |Una volta| A1[Fascia oraria\nDurata intervento\nData intervento\nIndirizzo]
+    GRP_A --> |Continuativo| A2[Fascia oraria\nDurata intervento\nData di inizio\nIndirizzo]
 
-    GRP_B --> |Una volta| B1[Orario inizio\nData intervento]
-    GRP_B --> |Continuativo| B2[Orario inizio\nData di inizio]
+    GRP_B --> |Una volta| B1[Fascia oraria\nData intervento\nIndirizzo]
+    GRP_B --> |Continuativo| B2[Fascia oraria\nData di inizio\nIndirizzo]
 
-    GRP_C --> |Una volta| C1[Data intervento]
-    GRP_C --> |Continuativo| C2[Data di inizio]
+    GRP_C --> |Una volta| C1[Data intervento\nIndirizzo]
+    GRP_C --> |Continuativo| C2[Data di inizio\nIndirizzo]
+
+    GRP_D --> |Una volta| D1[Data intervento\nIndirizzo]
+    GRP_D --> |Continuativo| D2[Data di inizio\nIndirizzo]
 
     A1 --> NOTE[Note opzionali]
     A2 --> NOTE
@@ -69,6 +73,8 @@ flowchart TD
     B2 --> NOTE
     C1 --> NOTE
     C2 --> NOTE
+    D1 --> NOTE
+    D2 --> NOTE
 
     NOTE --> INVIA[Invia\nAdmin — Inbound Requests]
 ```
