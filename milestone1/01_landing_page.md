@@ -46,18 +46,21 @@ Il form e' diviso in 2 step. I campi del secondo step variano in base al tipo di
 
 ```mermaid
 flowchart TD
-    S1[STEP 1\nNome e cognome — Email — Telefono\nTipo di servizio — Una volta o continuativo]
+    FORM[FORM\nNome e cognome\nEmail — Telefono\nTipo di servizio]
 
-    S1 --> TIPO{Tipo di servizio}
+    FORM --> TIPO{Tipo di servizio}
 
-    TIPO --> |Assistenza a ore\nEconomia domestica| A[Fascia oraria\nDurata intervento]
-    TIPO --> |Badante notturna| B[Fascia oraria]
-    TIPO --> |Badante 24h\nAltro| C[ ]
+    TIPO --> |Ass. a ore\nBadante notturna\nBadante 24h\nEconomia domestica| SCELTA{Booking\no Continuativo?}
+    TIPO --> |Altro| ALT[Note aggiuntive\nIndirizzo]
 
-    A & B & C --> DATA[Data intervento\nse una volta\n---\nData di inizio\nse continuativo]
+    SCELTA --> |Booking| BK[Fascia oraria\nDurata se richiesta\nSelezione data]
+    SCELTA --> |Continuativo| CONT[Fascia oraria\nDurata se richiesta\nData di inizio]
 
-    DATA --> FINE[Indirizzo\nNote opzionali]
-    FINE --> INVIA[Invia\nAdmin — Inbound Requests]
+    BK --> FINE[Note opzionali\nIndirizzo]
+    CONT --> FINE
+
+    FINE --> LT[Lead Triage]
+    ALT --> GM[Gestione manuale Admin]
 ```
 
 ---
