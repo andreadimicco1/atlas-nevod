@@ -42,35 +42,26 @@ flowchart TD
 
 ## Flusso 2 — Form Cliente
 
-Il form e' diviso in 2 step. I campi del secondo step variano in base al tipo di servizio scelto nel primo.
-
 ```mermaid
 flowchart TD
-    FORM[FORM\nNome e cognome\nEmail — Telefono\n]
+    FORM[FORM\nNome e cognome — Email — Telefono\nTipo di servizio]
 
     FORM --> TIPO{Tipo di servizio}
 
-    TIPO --> |Ass. a ore\nBadante notturna\nEconomia domestica| BK[Fascia oraria\nDurata se richiesta\nSelezione data]
-    TIPO --> |Badante 24h\nAltro| ALT[Note aggiuntive\nIndirizzo]
+    TIPO --> |Ass. a ore\nBadante notturna\nEconomia domestica| SCELTA{Booking\no Continuativo?}
+    TIPO --> |Badante 24h\nAltro| MANUAL
 
-    BK --> FINE[Note opzionali\nIndirizzo]
+    SCELTA --> |Booking| ORA{Fascia oraria}
+    SCELTA --> |Continuativo| MANUAL[Note aggiuntive\nIndirizzo]
+
+    ORA --> |Mattina| DUR[Durata se richiesta\nSelezione data]
+    ORA --> |Pomeriggio| DUR
+    ORA --> |Sera / Notte| DUR
+    ORA --> |Personalizzato| CUST[Campo testo libero]
+    CUST --> DUR
+
+    DUR --> FINE[Note opzionali\nIndirizzo]
     FINE --> LT[Lead Triage]
 
-    ALT --> GM[Gestione manuale Admin\nContinuativo valutato da Admin]
-```
-
----
-
-## Flusso 3 — Selezione fascia oraria
-
-Dove richiesto dal tipo di servizio, il campo orario non e' un testo libero ma una selezione a livelli.
-
-```mermaid
-flowchart TD
-    ORA{Fascia oraria}
-
-    ORA --> M[Mattina]
-    ORA --> P[Pomeriggio]
-    ORA --> SN[Sera / Notte]
-    ORA --> |Personalizzato| CUSTOM[Campo testo libero\nes. 14:30 oppure dalle 9 alle 11]
+    MANUAL --> GM[Gestione manuale Admin]
 ```
